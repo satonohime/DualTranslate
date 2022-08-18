@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Document</title>
+</head>
+<body>
+    <h1>DualTranslate</h1>
+    <div>
+        <form id="inputForm" th:action="@{/tl}" method="post" th:object="${data}">
+            <select id="LangFrom" th:field="*{LangFrom}">
+                <option id="LangFromOp1" value="en">English</option>
+                <option id="LangFromOp2" value="ja">Japanese</option>
+            </select>
+            <select id="LangTo" th:field="*{LangTo}">
+                <option id="LangToOp1" value="ja">Japanese</option>
+                <option id="LangToOp2" value="en">English</option>
+            </select>
+            <input id="text" type="text" th:field="*{text}">
+            <button>translate</button>
+        </form>
+    </div>
+    
+    <div>
+        <h2>Azure Cognitive Services Translation</h2>
+        <p id="MSResult" th:text="${data.MSResult}"></p>
+        <p id="MSResultReading" th:text="${data.MSTranslit}"></p>
+    </div>
+    <div>
+        <h2>Google Cloud Translation</h2>
+        <p id="GResult" th:text="${data.GResult}"></p>
+        <p id="GResultReading" th:text="${data.GTranslit}"></p>
+    </div>
+</body>
+</html>
