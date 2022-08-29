@@ -15,12 +15,12 @@
     <h1>DualTranslate</h1>
     <div>
         <form id="inputForm" th:action="@{/tl}" method="post" th:object="${data}">
-            <input hidden id="LangFrom" th:field="*{LangFrom}" value="ja">
-            <input hidden id="LangTo" th:field="*{LangTo}" value="en">
+            <input hidden id="LangFrom" th:field="*{LangFrom}" value="*{LangFrom}">
+            <input hidden id="LangTo" th:field="*{LangTo}" value="*{LangTo}">
             <div id="LangFromText">Japanese</div>
             <div id="LangToText">English</div>
             <input id="text" type="text" th:field="*{text}">
-            <button>translate</button>
+            <button id="TLButton">translate</button>
         </form>
         <button id="LangSwapButton">Switch</button>
     </div>

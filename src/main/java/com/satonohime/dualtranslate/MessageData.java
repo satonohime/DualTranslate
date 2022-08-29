@@ -13,10 +13,10 @@ public class MessageData {
         this.text = "";
         this.LangFrom = "ja";
         this.LangTo = "en";
-        this.MSResult = "placeholder1";
-        this.GResult = "placeholder2";
-        this.MSTranslit = "placeholder3";
-        this.GTranslit = "placeholder4";
+        this.MSResult = "";
+        this.GResult = "";
+        this.MSTranslit = "";
+        this.GTranslit = "";
     }
 
     public String getText() {
