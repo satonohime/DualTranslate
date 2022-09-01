@@ -1,3 +1,77 @@
-body {
+:root {
+    --rich-black-fogra-29: #0d1821ff;
+    --indigo-dye: #344966ff;
+    --light-steel-blue: #b4cdedff;
+    --baby-powder: #f0f4efff;
+    --sage: #bfcc94ff;
+}
+
+* {
+    margin: 0px;
+    font-size: 15px;
+    text-decoration: none;
     font-family: 'M PLUS 1p', sans-serif;
+}
+
+body {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--baby-powder);
+}
+
+nav {
+    background-color: var(--indigo-dye);
+    margin-bottom: 5px;
+}
+
+h1 {
+    font-size: 150%;
+    color: var(--baby-powder);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+#langs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+#langs > div {
+    display: flex;
+    padding: 10px;
+    padding-left: 0px;
+}
+
+.inputDiv {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.resultsDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.resultsChild {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#MSResults {
+    padding-right: 50px;
+}
+
+.Result {
+    min-width: 500px;
+    min-height:100px;
+    border: 2px solid;
+    border-color: var(--rich-black-fogra-29);
+    background-color: white;
 }

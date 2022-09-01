@@ -12,28 +12,37 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>DualTranslate</h1>
-    <div>
+    <nav>
+        <h1>DualTranslate</h1>
+    </nav>
+    
+    <div class="inputDiv">
+        <div id="langs">
+            <div id="LangFromText">Japanese</div>
+            <div id="LangToText">English</div>
+            <button id="LangSwapButton">Switch</button>
+        </div>
+        
         <form id="inputForm" th:action="@{/tl}" method="post" th:object="${data}">
             <input hidden id="LangFrom" th:field="*{LangFrom}" value="*{LangFrom}">
             <input hidden id="LangTo" th:field="*{LangTo}" value="*{LangTo}">
-            <div id="LangFromText">Japanese</div>
-            <div id="LangToText">English</div>
             <input id="text" type="text" th:field="*{text}">
             <button id="TLButton">translate</button>
         </form>
-        <button id="LangSwapButton">Switch</button>
     </div>
     
-    <div>
-        <h2>Azure Cognitive Services Translation</h2>
-        <p id="MSResult" th:text="${data.MSResult}"></p>
-        <p id="MSResultReading" th:text="${data.MSTranslit}"></p>
+    <div class="resultsDiv">
+        <div class="resultsChild" id="MSResults">
+            <h2>Azure Cognitive Services Translation</h2>
+            <div class="Result" id="MSResult" th:text="${data.MSResult}"></div>
+            <div id="MSResultReading" th:text="${data.MSTranslit}"></div>
+        </div>
+        <div class="resultsChild" id="GResults">
+            <h2>Google Cloud Translation</h2>
+            <div class="Result" id="GResult" th:text="${data.GResult}"></div>
+            <div id="GResultReading" th:text="${data.GTranslit}"></div>
+        </div>
     </div>
-    <div>
-        <h2>Google Cloud Translation</h2>
-        <p id="GResult" th:text="${data.GResult}"></p>
-        <p id="GResultReading" th:text="${data.GTranslit}"></p>
-    </div>
+    
 </body>
 </html>
