@@ -14,6 +14,3 @@ Code samples used and modified from:
         https://github.com/MicrosoftTranslator/Text-Translation-Code-Samples/blob/main/Java-Code-Samples/Translate/src/main/java/Translate.java
   - Google Cloud code samples:
         https://cloud.google.com/translate/docs/advanced/translate-text-advance
-
-# How To Run
-Rename MSTranslatorText_Template.java to MSTranslatorText.java, and do the same for all occurences within the file. Then, run the main function in DualtranslateApplication.java and navigate to localhost:8080 in your browser.
