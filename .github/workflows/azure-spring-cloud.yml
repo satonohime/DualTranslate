@@ -1,29 +1,29 @@
 name: AzureSpringCloud
 on: push
-env:
-  ASC_PACKAGE_PATH: ${{ github.workspace }}
-  key: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
-  AZURE_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
 
 jobs:
-  deploy_to_production:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    name: deploy to production with source code
     steps:
-      - name: Checkout GitHub Action
-        uses: actions/checkout@v2
 
-      - name: Login via Azure CLI
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: actions/checkout@main
 
-      - name: deploy to production step with soruce code
-        uses: azure/spring-cloud-deploy@v1
-        with:
-          azure-subscription: ${{ env.AZURE_SUBSCRIPTION }}
-          action: deploy
-          service-name: dualtranslate
-          app-name: translator
-          use-staging-deployment: false
-          package: ${{ env.ASC_PACKAGE_PATH }}
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+
+    - name: maven build, clean
+      run: |
+        mvn clean package -DskipTests
+
+    # Maven plugin can cosume this authentication method automatically
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    # Maven deploy, make sure you have correct configurations in your pom.xml
+    - name: deploy to Azure Spring Apps using Maven
+      run: |
+        mvn azure-spring-apps:deploy
