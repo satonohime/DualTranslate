@@ -2,7 +2,7 @@ name: AzureSpringCloud
 on: push
 env:
   ASC_PACKAGE_PATH: ${{ github.workspace }}
-  AZURE_SUBSCRIPTION: Azure for Students
+  AZURE_SUBSCRIPTION: ${{ secrets.AZURE_SUB_NAME }}
   key: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
 
 jobs:
