@@ -3,6 +3,7 @@ on: push
 env:
   ASC_PACKAGE_PATH: ${{ github.workspace }}
   key: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
+  AZURE_SUBSCRIPTION: subscription-1
 
 jobs:
   deploy_to_production:
