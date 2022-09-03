@@ -3,12 +3,11 @@ on: push
 env:
   ASC_PACKAGE_PATH: ${{ github.workspace }}
   key: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
-  AZURE_SUBSCRIPTION: ${{ env.key }}
 
 jobs:
   deploy_to_production:
     runs-on: ubuntu-latest
-    name: deploy to production with soruce code
+    name: deploy to production with source code
     steps:
       - name: Checkout GitHub Action
         uses: actions/checkout@v2
@@ -24,6 +23,6 @@ jobs:
           azure-subscription: ${{ env.AZURE_SUBSCRIPTION }}
           action: deploy
           service-name: dualtranslate
-          app-name: <app name>
+          app-name: translator
           use-staging-deployment: false
           package: ${{ env.ASC_PACKAGE_PATH }}
