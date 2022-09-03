@@ -32,5 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 test/
-MSTranslatorText.java
+MSTranslatorText_Template.java
 key.json
