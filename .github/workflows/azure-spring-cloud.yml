@@ -2,8 +2,8 @@ name: AzureSpringCloud
 on: push
 env:
   ASC_PACKAGE_PATH: ${{ github.workspace }}
-  AZURE_SUBSCRIPTION: subscription-1
   key: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
+  AZURE_SUBSCRIPTION: ${{ env.key }}
 
 jobs:
   deploy_to_production:
