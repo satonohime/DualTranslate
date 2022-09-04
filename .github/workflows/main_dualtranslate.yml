@@ -9,8 +9,14 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  KEY: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
+jobs: 
+  create_env_file_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create .env file
+        uses: ozaytsev86/create-env-file@v1
+        with:
+          KEY: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
 
 jobs:
   build:
