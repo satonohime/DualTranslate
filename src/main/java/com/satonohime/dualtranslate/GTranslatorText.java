@@ -14,7 +14,7 @@ public class GTranslatorText {
             return translateText(input, targetLanguage);
         }
         catch (IOException e) {
-            return "Error";
+            return e.getStackTrace().toString();
         }
 
     }
@@ -47,10 +47,7 @@ public class GTranslatorText {
                 return translation.getTranslatedText();
             }
         }
-        catch(IOException e) {
-            return e.getStackTrace().toString();
-        }
-        return "error";
+        return "[Error! Unable to retrieve text]";
     }
 
 }
