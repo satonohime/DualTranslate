@@ -19,14 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - id: 'auth'
-        name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
-        with:
-          token_format: 'access_token'
-          workload_identity_provider: 'projects/921945474250/locations/global/workloadIdentityPools/identity-pool1/providers/github-oidc1'
-          service_account: 'servAcc1@dualtranslate.iam.gserviceaccount.com'
-
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
