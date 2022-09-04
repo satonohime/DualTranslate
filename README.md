@@ -1,6 +1,7 @@
 # DualTranslate
-Web application to translate between English and Japanese that uses two translation services to easily cross reference results. EN -> JP translation will also provide romanized results, similar to Google Translate. No current plans to host the website anywhere.
-This webapp uses Google Cloud translation and Azure Cognitive Services as the two translation services.
+Web application to translate between English and Japanese that uses two translation services to easily cross reference results. EN -> JP translation will also provide romanized results, similar to Google Translate. This webapp uses Google Cloud translation and Azure Cognitive Services as the two translation services.
+
+Hosted on Azure at https://dualtranslate.azurewebsites.net
 
 Tools used:
   - Java
