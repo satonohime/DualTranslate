@@ -1,8 +1,8 @@
-name: AzureSpringCloud
+name: AzureSpringApps
 on: push
 env:
   ASC_PACKAGE_PATH: ${{ github.workspace }}
-  AZURE_SUBSCRIPTION: sub1
+  AZURE_SUBSCRIPTION: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
   KEY: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: deploy to production with soruce code
     steps:
-      - name: Checkout GitHub Action
+      - name: Checkout Github Action
         uses: actions/checkout@v2
 
       - name: Login via Azure CLI
@@ -19,7 +19,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: deploy to production step with soruce code
-        uses: azure/spring-cloud-deploy@v1
+        uses: azure/spring-apps-deploy@v1
         with:
           azure-subscription: ${{ env.AZURE_SUBSCRIPTION }}
           action: deploy
