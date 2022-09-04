@@ -1,5 +1,4 @@
 package com.satonohime.dualtranslate;
-
 import java.io.IOException;
 
 import com.google.gson.*;
