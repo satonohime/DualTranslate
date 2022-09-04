@@ -77,11 +77,6 @@
 				<groupId>com.microsoft.azure</groupId>
 				<artifactId>azure-spring-apps-maven-plugin</artifactId>
 				<version>1.10.0</version>
-				<configuration>
-					<subscriptionId>${env.KEY}</subscriptionId>
-					<clusterName>v-spr-cld</clusterName>
-					<appName>customers-service</appName>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
