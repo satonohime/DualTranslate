@@ -1,4 +1,5 @@
 package com.satonohime.dualtranslate;
+
 import java.io.IOException;
 
 import com.google.gson.*;
@@ -10,11 +11,12 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MSTranslatorText {
-    private static String key = System.getenv("ENV_KEY");
+    private static String key = "";
     public String endpoint = "https://api.cognitive.microsofttranslator.com";
     public String RouteTL = "/translate?api-version=3.0&from=en&to=ja";
     public String RouteTLit = "/transliterate?api-version=3.0&language=ja&fromScript=Jpan&toScript=Latn";
     public String url = endpoint.concat(RouteTL);
+
 
     // Add your location, also known as region. The default is global.
     // This is required if using a Cognitive Services resource.
@@ -66,9 +68,10 @@ public class MSTranslatorText {
         return response.body().string();
     }
 
-    public static String translate(String[] input, String LangFrom, String LangTo) {
+    public static String translate(String[] input, String LangFrom, String LangTo, String secret) {
         try {
             MSTranslatorText translateRequest = new MSTranslatorText();
+            key = secret;
             translateRequest.setURL(LangFrom, LangTo);
             String response = translateRequest.Post(input);
 

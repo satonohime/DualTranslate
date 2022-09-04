@@ -1,5 +1,10 @@
 package com.satonohime.dualtranslate;
 
+import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.azure.security.keyvault.secrets.SecretClient;
+import com.azure.security.keyvault.secrets.SecretClientBuilder;
+import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,6 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class WebController {
+
+   private String retrieveSecret() {
+      SecretClient secretClient = new SecretClientBuilder()
+         .vaultUrl("https://vault-satonohime-1.vault.azure.net/")
+         .credential(new DefaultAzureCredentialBuilder().build())
+         .buildClient();
+
+      KeyVaultSecret secret = secretClient.getSecret("sub-key");
+      return secret.getValue();
+   }
+
    @RequestMapping(value = "/")
    public String index(Model model) {
       model.addAttribute("data", new MessageData());
@@ -19,7 +35,7 @@ public class WebController {
       String[] results = new String[1];
       results[0] = data.getText();
       data.setGResult(GTranslatorText.translate(data.getText(), data.getLangTo()));
-      data.setMSResult(MSTranslatorText.translate(results, data.getLangFrom(), data.getLangTo()));
+      data.setMSResult(MSTranslatorText.translate(results, data.getLangFrom(), data.getLangTo(), retrieveSecret()));
       
       //HTML data contains some hidden characters, condition below used to workaround
       if (data.getLangTo().contains("ja") && data.getLangTo().length() == 2) {
