@@ -3,14 +3,14 @@
 
 name: Build and deploy JAR app to Azure Web App - dualtranslate
 
-env:
-  KEY: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
-
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+
+env:
+  KEY: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
 
 jobs:
   build:
