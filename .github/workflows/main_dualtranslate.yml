@@ -16,6 +16,9 @@ jobs:
   build:
     runs-on: windows-latest
 
+    env:
+      KEY: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
+
     steps:
       - uses: actions/checkout@v2
 
@@ -35,6 +38,10 @@ jobs:
 
   deploy:
     runs-on: windows-latest
+
+    env:
+      KEY: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
+
     needs: build
     environment:
       name: 'Production'
