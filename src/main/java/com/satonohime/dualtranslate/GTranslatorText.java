@@ -14,7 +14,7 @@ public class GTranslatorText {
             return translateText(input, targetLanguage);
         }
         catch (IOException e) {
-            return e.getStackTrace().toString();
+            return "dog";
         }
 
     }
