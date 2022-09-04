@@ -47,7 +47,10 @@ public class GTranslatorText {
                 return translation.getTranslatedText();
             }
         }
-        return "[Error! Unable to retrieve text]";
+        catch(IOException e) {
+            return e.getStackTrace().toString();
+        }
+        return "error";
     }
 
 }
