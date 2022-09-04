@@ -6,6 +6,8 @@ import com.google.cloud.translate.v3.Translation;
 import com.google.cloud.translate.v3.TranslationServiceClient;
 import java.io.IOException;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 
 public class GTranslatorText {
 
@@ -14,7 +16,8 @@ public class GTranslatorText {
             return translateText(input, targetLanguage);
         }
         catch (IOException e) {
-            return "dog";
+            String stacktrace = ExceptionUtils.getStackTrace(e);
+            return stacktrace;
         }
 
     }
