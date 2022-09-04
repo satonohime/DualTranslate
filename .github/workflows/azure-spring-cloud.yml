@@ -1,4 +1,7 @@
 name: AzureSpringCloud
+env:
+  KEY: ${{ secrets.AZURE_SUBSCRIPTION_KEY }}
+
 on: push
 
 jobs:
