@@ -1,4 +1,5 @@
 package com.satonohime.dualtranslate;
+
 import com.google.cloud.translate.v3.LocationName;
 import com.google.cloud.translate.v3.TranslateTextRequest;
 import com.google.cloud.translate.v3.TranslateTextResponse;
@@ -8,14 +9,12 @@ import java.io.IOException;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-
 public class GTranslatorText {
 
     public static String translate(String input, String targetLanguage) {
         try {
             return translateText(input, targetLanguage);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             String stacktrace = ExceptionUtils.getStackTrace(e);
             return stacktrace;
         }
@@ -30,13 +29,12 @@ public class GTranslatorText {
     }
 
     public static String translateText(String projectId, String targetLanguage, String text)
-        throws IOException {
+            throws IOException {
 
         try (TranslationServiceClient client = TranslationServiceClient.create()) {
             LocationName parent = LocationName.of(projectId, "global");
 
-            TranslateTextRequest request =
-                TranslateTextRequest.newBuilder()
+            TranslateTextRequest request = TranslateTextRequest.newBuilder()
                     .setParent(parent.toString())
                     .setMimeType("text/plain")
                     .setTargetLanguageCode(targetLanguage)

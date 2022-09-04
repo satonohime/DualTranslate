@@ -16,9 +16,9 @@ public class WebController {
 
    private String retrieveSecret() {
       SecretClient secretClient = new SecretClientBuilder()
-         .vaultUrl("https://vault-satonohime-1.vault.azure.net/")
-         .credential(new DefaultAzureCredentialBuilder().build())
-         .buildClient();
+            .vaultUrl("https://vault-satonohime-1.vault.azure.net/")
+            .credential(new DefaultAzureCredentialBuilder().build())
+            .buildClient();
 
       KeyVaultSecret secret = secretClient.getSecret("sub-key");
       return secret.getValue();
@@ -36,8 +36,8 @@ public class WebController {
       results[0] = data.getText();
       data.setGResult(GTranslatorText.translate(data.getText(), data.getLangTo()));
       data.setMSResult(MSTranslatorText.translate(results, data.getLangFrom(), data.getLangTo(), retrieveSecret()));
-      
-      //HTML data contains some hidden characters, condition below used to workaround
+
+      // HTML data contains some hidden characters, condition below used to workaround
       if (data.getLangTo().contains("ja") && data.getLangTo().length() == 2) {
          results = new String[2];
          results[0] = data.getMSResult();
@@ -48,7 +48,7 @@ public class WebController {
          data.setMSTranslit(msLit);
          data.setGTranslit(gLit);
       }
-      
+
       model.addAttribute("data", data);
       return "index";
    }

@@ -17,7 +17,6 @@ public class MSTranslatorText {
     public String RouteTLit = "/transliterate?api-version=3.0&language=ja&fromScript=Jpan&toScript=Latn";
     public String url = endpoint.concat(RouteTL);
 
-
     // Add your location, also known as region. The default is global.
     // This is required if using a Cognitive Services resource.
     private static String location = "westus2";
@@ -30,8 +29,8 @@ public class MSTranslatorText {
         url = endpoint.concat(RouteTL);
     }
 
-    //Do not check for to/from languages here
-    //Values pulled from HTML form have different byte values than strings in IDE
+    // Do not check for to/from languages here
+    // Values pulled from HTML form have different byte values than strings in IDE
     private void setURLTLit() {
         url = endpoint.concat(RouteTLit);
     }
@@ -52,7 +51,7 @@ public class MSTranslatorText {
     public String Post(String[] input) throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         String JSONInput = buildJSON(input);
-        String[] HeaderField = new String[]{"Content-Length", "" + JSONInput.length()};
+        String[] HeaderField = new String[] { "Content-Length", "" + JSONInput.length() };
         RequestBody body = RequestBody.create(JSONInput, mediaType);
         Request.Builder requestBuilder = new Request.Builder()
                 .url(url)
@@ -96,10 +95,10 @@ public class MSTranslatorText {
             JsonObject GTLit = jsonArr.get(1).getAsJsonObject();
             String MSTLitText = MSTLit.get("text").getAsString();
             String GTLitText = GTLit.get("text").getAsString();
-            return new String[]{MSTLitText, GTLitText};
+            return new String[] { MSTLitText, GTLitText };
         } catch (Exception e) {
-            return new String[]{e.toString(), e.toString()};
+            return new String[] { e.toString(), e.toString() };
         }
-        
+
     }
 }

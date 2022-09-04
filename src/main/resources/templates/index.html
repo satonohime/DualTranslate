@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,11 +12,12 @@
     <script type="text/javascript" th:src="@{js/src/script.js}"></script>
     <title>DualTranslate</title>
 </head>
+
 <body>
     <nav>
         <h1>DualTranslate</h1>
     </nav>
-    
+
     <div class="inputDiv">
         <div id="langs">
             <div id="LangFromText">Japanese</div>
@@ -23,7 +25,7 @@
             <div id="LangToText">English</div>
             <button id="LangSwapButton">Switch</button>
         </div>
-        
+
         <form id="inputForm" th:action="@{/tl}" method="post" th:object="${data}">
             <input hidden id="LangFrom" th:field="*{LangFrom}" value="*{LangFrom}">
             <input hidden id="LangTo" th:field="*{LangTo}" value="*{LangTo}">
@@ -31,7 +33,7 @@
             <button id="TLButton">translate</button>
         </form>
     </div>
-    
+
     <div class="resultsDiv">
         <div class="resultsChild" id="MSResults">
             <h2>Azure Cognitive Services Translation</h2>
@@ -44,6 +46,7 @@
             <div id="GResultReading" th:text="${data.GTranslit}"></div>
         </div>
     </div>
-    
+
 </body>
+
 </html>
