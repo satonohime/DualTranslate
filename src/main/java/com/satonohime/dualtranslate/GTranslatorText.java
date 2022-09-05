@@ -1,11 +1,19 @@
 package com.satonohime.dualtranslate;
 
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.gax.core.FixedCredentialsProvider;
+import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.translate.v3.LocationName;
 import com.google.cloud.translate.v3.TranslateTextRequest;
 import com.google.cloud.translate.v3.TranslateTextResponse;
 import com.google.cloud.translate.v3.Translation;
 import com.google.cloud.translate.v3.TranslationServiceClient;
+import com.google.cloud.translate.v3.TranslationServiceSettings;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -31,7 +39,16 @@ public class GTranslatorText {
     public static String translateText(String projectId, String targetLanguage, String text)
             throws IOException {
 
-        try (TranslationServiceClient client = TranslationServiceClient.create()) {
+        InputStream stream = new ByteArrayInputStream(System.getenv("GOOGLE_CREDENTIALS").getBytes(StandardCharsets.UTF_8));
+        ServiceAccountCredentials credential = ServiceAccountCredentials.fromStream(stream);
+
+        TranslationServiceSettings translationServiceSettings =
+            TranslationServiceSettings.newBuilder()
+                .setCredentialsProvider(FixedCredentialsProvider.create(credential))
+                .build();
+           
+
+        try (TranslationServiceClient client = TranslationServiceClient.create(translationServiceSettings)) {
             LocationName parent = LocationName.of(projectId, "global");
 
             TranslateTextRequest request = TranslateTextRequest.newBuilder()
