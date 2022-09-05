@@ -1,71 +1,19 @@
 package com.satonohime.dualtranslate;
 
-import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.gax.core.FixedCredentialsProvider;
-import com.google.auth.oauth2.ServiceAccountCredentials;
-import com.google.cloud.translate.v3.LocationName;
-import com.google.cloud.translate.v3.TranslateTextRequest;
-import com.google.cloud.translate.v3.TranslateTextResponse;
-import com.google.cloud.translate.v3.Translation;
-import com.google.cloud.translate.v3.TranslationServiceClient;
-import com.google.cloud.translate.v3.TranslationServiceSettings;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-
-import org.apache.commons.lang3.exception.ExceptionUtils;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
+import com.google.cloud.translate.Translate.TranslateOption;
 
 public class GTranslatorText {
-
-    public static String translate(String input, String targetLanguage) {
-        try {
-            return translateText(input, targetLanguage);
-        } catch (IOException e) {
-            String stacktrace = ExceptionUtils.getStackTrace(e);
-            return stacktrace;
-        }
-
+    public static String translate(String text, String langFrom, String langTo) {
+        Translate translate = TranslateOptions.getDefaultInstance().getService();
+   
+        Translation translation = translate.translate(
+            text,
+            TranslateOption.sourceLanguage(langFrom),
+            TranslateOption.targetLanguage(langTo));
+        
+        return translation.getTranslatedText();
     }
-
-    public static String translateText(String input, String targetLang) throws IOException {
-        String projectId = "dualtranslate";
-        String targetLanguage = targetLang;
-        String text = input;
-        return translateText(projectId, targetLanguage, text);
-    }
-
-    public static String translateText(String projectId, String targetLanguage, String text)
-            throws IOException {
-
-        InputStream stream = new ByteArrayInputStream(System.getenv("GOOGLE_CREDENTIALS").getBytes(StandardCharsets.UTF_8));
-        ServiceAccountCredentials credential = ServiceAccountCredentials.fromStream(stream);
-
-        TranslationServiceSettings translationServiceSettings =
-            TranslationServiceSettings.newBuilder()
-                .setCredentialsProvider(FixedCredentialsProvider.create(credential))
-                .build();
-           
-
-        try (TranslationServiceClient client = TranslationServiceClient.create(translationServiceSettings)) {
-            LocationName parent = LocationName.of(projectId, "global");
-
-            TranslateTextRequest request = TranslateTextRequest.newBuilder()
-                    .setParent(parent.toString())
-                    .setMimeType("text/plain")
-                    .setTargetLanguageCode(targetLanguage)
-                    .addContents(text)
-                    .build();
-
-            TranslateTextResponse response = client.translateText(request);
-
-            // Display the translation for each input text provided
-            for (Translation translation : response.getTranslationsList()) {
-                return translation.getTranslatedText();
-            }
-        }
-        return "[Error! Unable to retrieve text]";
-    }
-
 }
