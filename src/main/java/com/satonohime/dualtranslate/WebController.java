@@ -19,7 +19,7 @@ public class WebController {
    public String result(@ModelAttribute MessageData data, Model model) {
       String[] results = new String[1];
       results[0] = data.getText();
-      data.setGResult(GTranslatorText.translate(data.getText(), data.getLangTo()));
+      //data.setGResult(GTranslatorText.translate(data.getText(), data.getLangTo()));
       data.setMSResult(MSTranslatorText.translate(results, data.getLangFrom(), data.getLangTo()));
 
       // HTML data contains some hidden characters, condition below used to workaround
